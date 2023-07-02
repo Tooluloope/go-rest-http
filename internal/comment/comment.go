@@ -2,7 +2,12 @@ package comment
 
 import (
 	"context"
+	"errors"
 	"fmt"
+)
+var (
+	ErrFetchingComment = errors.New("error fetching comment")
+	ErrNotImplemented = errors.New("not implemented")
 )
 
 type Store interface {
@@ -31,7 +36,19 @@ func (s *Service) GetComment(ctx context.Context, id string) (Comment, error) {
 	fmt.Println("GetComment")
 	comment, err := s.store.GetComment(ctx, id)
 	if err != nil {
-		return Comment{}, err
+		return Comment{}, ErrFetchingComment
 	}
 	return comment, nil
+}
+
+func (s *Service) UpdateComment(ctx context.Context, comment Comment) error {
+	return ErrNotImplemented
+}
+
+func (s *Service) DeleteComment(ctx context.Context, id string) error {
+	return ErrNotImplemented
+}
+
+func (s *Service) CreateComment(ctx context.Context, comment Comment) (Comment, error) {
+	return Comment{} , ErrNotImplemented
 }
