@@ -13,16 +13,15 @@ type Database struct {
 	Client *sqlx.DB
 }
 
-func NewDatabase()(*Database, error){
+func NewDatabase() (*Database, error) {
 	connectionString := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=%s",
-	os.Getenv("DB_HOST"),
-	os.Getenv("DB_PORT"),
-	os.Getenv("DB_USER"),
-	os.Getenv("DB_PASSWORD"),
-	os.Getenv("DB_NAME"),
-	os.Getenv("SSL_MODE"),
+		os.Getenv("DB_HOST"),
+		os.Getenv("DB_PORT"),
+		os.Getenv("DB_USER"),
+		os.Getenv("DB_PASSWORD"),
+		os.Getenv("DB_NAME"),
+		os.Getenv("SSL_MODE"),
 	)
-	fmt.Println(connectionString)
 
 	dbConn, err := sqlx.Connect("postgres", connectionString)
 	if err != nil {
@@ -34,7 +33,6 @@ func NewDatabase()(*Database, error){
 	}, nil
 }
 
-
-func (d *Database) Ping (ctx context.Context) error {
+func (d *Database) Ping(ctx context.Context) error {
 	return d.Client.PingContext(ctx)
 }

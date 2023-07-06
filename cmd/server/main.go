@@ -1,8 +1,10 @@
 package main
 
 import (
+	"context"
 	"fmt"
 
+	"github.com/tooluloope/go-rest-http/internal/comment"
 	"github.com/tooluloope/go-rest-http/internal/db"
 )
 
@@ -22,11 +24,13 @@ func Run() error {
 		return err
 	}
 
-	fmt.Println("Connected to db and Pinged successfully")
+	cmtService := comment.NewService(db)
+	fmt.Println(cmtService.GetComment(
+		context.Background(),
+		"42c21d77-9759-4658-bd33-e415a5bf9011",
+	))
 	return nil
 }
-
-
 
 func main() {
 	fmt.Println("Hello world")
