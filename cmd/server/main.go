@@ -25,6 +25,18 @@ func Run() error {
 	}
 
 	cmtService := comment.NewService(db)
+	cmt, err := cmtService.PostComment(
+		context.Background(),
+		comment.Comment{
+			Slug:   "test",
+			Body:   "test",
+			Author: "TOlulope",
+			ID:     "42c21d77-9759-4658-bd33-e415a5bf9011",
+		},
+	)
+
+	fmt.Println(cmt, err)
+
 	fmt.Println(cmtService.GetComment(
 		context.Background(),
 		"42c21d77-9759-4658-bd33-e415a5bf9011",
