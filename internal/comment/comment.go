@@ -3,7 +3,6 @@ package comment
 import (
 	"context"
 	"errors"
-	"fmt"
 )
 
 var (
@@ -36,7 +35,6 @@ func NewService(store Store) *Service {
 }
 
 func (s *Service) GetComment(ctx context.Context, id string) (Comment, error) {
-	fmt.Println("GetComment")
 	comment, err := s.store.GetComment(ctx, id)
 	if err != nil {
 		return Comment{}, ErrFetchingComment
